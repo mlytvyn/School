@@ -28,6 +28,8 @@ end
 
 gem 'jquery-rails'
 gem 'bootstrap-sass'
+gem 'bcrypt-ruby'
+gem 'annotate', group: :development
 
 group :test do
   gem 'capybara', '>= 1.1.2'
