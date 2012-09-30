@@ -29,6 +29,9 @@ end
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'bcrypt-ruby'
+gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 gem 'annotate', group: :development
 
 group :test do
