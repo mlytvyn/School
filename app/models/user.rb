@@ -13,7 +13,8 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :user_type
+  USER_TYPES = ["Teacher", "Student"] # don't include "Administrator"
   has_secure_password
   has_many :microposts, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -50,10 +51,10 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id).destroy
   end
 
-  def self.search(search, page)
-    paginate :per_page => 10, :page => page,
-             :conditions => ['name like ?', "%#{search}%"],
-             :order => 'name'
+  def self.search(search, user_type, page)
+    paginate per_page: 10, page: page,
+             conditions: ["name like ? and user_type LIKE ?", "%#{search}%", "#{user_type}"],
+             order: 'name'
   end
 
   private
