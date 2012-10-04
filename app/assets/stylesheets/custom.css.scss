@@ -170,9 +170,9 @@ input, textarea, select, .uneditable-input {
   @extend .error;
 }
 
-/* users index */
+/* users, classes index */
 
-.users {
+.paginable-list {
   list-style: none;
   margin: 0;
   li {

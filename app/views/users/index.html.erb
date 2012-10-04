@@ -1,17 +1,18 @@
-<% provide(:title, 'All users') %>
-<h1>All users</h1>
+<% provide(:title, 'All ' + params[:user_type] + 's') %>
+<h1>All <%= params[:user_type]%>s</h1>
 
-<%= form_tag users_path, method: "get" do %>
-  <%= label_tag :search, "Search for:" %>
-  <%= text_field_tag :search, params[:search] %>
+<%= will_paginate class: "pagination pagination-centered"%>
+
+<%= form_tag users_path, class: "form-search", method: "get" do %>
   <%= hidden_field_tag 'user_type', params[:user_type] %>
-  <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+  <div class="input-prepend">
+    <%= submit_tag "Filter by name", :name => nil, class: "btn btn-info" %>
+    <%= text_field_tag :search, params[:search], class: "search-query" %>
+  </div>
 <% end %>
 
-<%= will_paginate %>
-
-<ul class="users">
+<ul class="paginable-list">
   <%= render @users %>
 </ul>
 
-<%= will_paginate %>
+<%= will_paginate class: "pagination pagination-centered" %>

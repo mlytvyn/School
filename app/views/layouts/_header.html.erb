@@ -1,18 +1,43 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "sample app", root_path, id: "logo" %>
+      <%= link_to "school xyz", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Help", help_path %></li>
           <% if signed_in? %>
-            <li><%= link_to "Classes", users_path(user_type: "classes") %></li>
             <% if is_admin? %>
-              <li><%= link_to "Administrators", users_path(user_type: "Administrator") %></li>
+              <li><%= link_to "Manage Classes", school_classes_path %></li>  
+            <% else %>
+              <li id="fat-menu" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Classes <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- It will allow next actions for:
+                      - Administrators: create / modify / delete
+                      - Teachers: modify if owner / assign students
+                      - Students: assign themselfs to the class -->
+                  <li><%= link_to "Search for Classes", school_classes_path %></li>
+                    <li class="divider"></li>
+                    <li><%= link_to "My Classes", school_classes_path %></li>
+                </ul>
+              </li>
             <% end %>
-            <li><%= link_to "Teachers", users_path(user_type: "Teacher") %></li>
-            <li><%= link_to "Students", users_path(user_type: "Student") %></li>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Users <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <% if is_admin? %>
+                  <li><%= link_to "Administrators", users_path(user_type: "Administrator") %></li>
+                  <li class="divider"></li>
+                <% end %>
+                <li><%= link_to "Teachers", users_path(user_type: "Teacher") %></li>
+                <li><%= link_to "Students", users_path(user_type: "Student") %></li>
+              </ul>
+            </li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>

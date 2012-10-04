@@ -23,7 +23,15 @@ module SessionsHelper
   end
 
   def is_admin?
-    @current_user.user_type == "Administrator"
+    current_user.user_type == "Administrator"
+  end
+
+  def is_student?
+    current_user.user_type == "Student"
+  end
+
+  def is_teacher?
+    current_user.user_type == "Teacher"
   end
 
   def current_user?(user)

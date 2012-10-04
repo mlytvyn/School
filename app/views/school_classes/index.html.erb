@@ -1,0 +1,20 @@
+<% provide(:title, 'All Classes') %>
+<h1>Manage Classes</h1>
+
+<%= will_paginate class: "pagination pagination-centered"%>
+
+<%= form_tag school_classes_path, class: "form-search", method: "get" do %>
+  <div class="input-prepend">
+    <%= submit_tag "Search for Class", :title => nil, class: "btn btn-info" %>
+    <%= text_field_tag :search, params[:search], class: "search-query" %>
+  </div>
+  <% if !is_student? %>
+    <%= link_to "Create new Class", school_classes_new_path, class: "btn btn-large btn-primary create-new-class" %>
+  <% end %>
+<% end %>
+
+<ul class="paginable-list">
+  <%= render @school_classes %>
+</ul>
+
+<%= will_paginate class: "pagination pagination-centered" %>
